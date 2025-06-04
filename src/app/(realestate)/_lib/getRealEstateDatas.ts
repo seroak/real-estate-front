@@ -43,7 +43,7 @@ export default async function getRealEstateDatas({
   });
 
   url.searchParams.append("cursor", pageParam.toString());
-
+  console.log("Fetching real estate listings from:", url.toString());
   const response = await fetch(url.toString(), {
     method: "GET",
     headers: { "Content-Type": "application/json" },
