@@ -137,7 +137,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터를 구성하는 최소 마커 수를 설정합니다.
      * @param {number} size 클러스터를 구성하는 최소 마커 수
      */
-    setMinClusterSize: function (size) {
+    setMinClusterSize: function (size: any) {
       this.setOptions("minClusterSize", size);
     },
 
@@ -153,7 +153,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커를 노출할 최대 줌 레벨을 설정합니다.
      * @param {number} zoom 클러스터 마커를 노출할 최대 줌 레벨
      */
-    setMaxZoom: function (zoom) {
+    setMaxZoom: function (zoom: any) {
       this.setOptions("maxZoom", zoom);
     },
 
@@ -169,7 +169,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터를 구성할 그리드 크기를 설정합니다. 단위는 픽셀입니다.
      * @param {number} size 클러스터를 구성할 그리드 크기
      */
-    setGridSize: function (size) {
+    setGridSize: function (size: any) {
       this.setOptions("gridSize", size);
     },
 
@@ -177,7 +177,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커의 아이콘을 결정하는 인덱스 생성기를 반환합니다.
      * @return {Array | Function} 인덱스 생성기
      */
-    getIndexGenerator: function () {
+    getIndexGenerator: function (): any {
       return this.getOptions("indexGenerator");
     },
 
@@ -185,7 +185,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커의 아이콘을 결정하는 인덱스 생성기를 설정합니다.
      * @param {Array | Function} indexGenerator 인덱스 생성기
      */
-    setIndexGenerator: function (indexGenerator) {
+    setIndexGenerator: function (indexGenerator: any) {
       this.setOptions("indexGenerator", indexGenerator);
     },
 
@@ -193,7 +193,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터로 구성할 마커를 반환합니다.
      * @return {Array.<naver.maps.Marker>} 클러스터로 구성할 마커
      */
-    getMarkers: function () {
+    getMarkers: function (): any {
       return this.getOptions("markers");
     },
 
@@ -201,7 +201,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터로 구성할 마커를 설정합니다.
      * @param {Array.<naver.maps.Marker>} markers 클러스터로 구성할 마커
      */
-    setMarkers: function (markers) {
+    setMarkers: function (markers: any) {
       this.setOptions("markers", markers);
     },
 
@@ -209,7 +209,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커 아이콘을 반환합니다.
      * @return {Array.<naver.maps.Marker~ImageIcon | naver.maps.Marker~SymbolIcon | naver.maps.Marker~HtmlIcon>} 클러스터 마커 아이콘
      */
-    getIcons: function () {
+    getIcons: function (): any {
       return this.getOptions("icons");
     },
 
@@ -217,15 +217,15 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커 아이콘을 설정합니다.
      * @param {Array.<naver.maps.Marker~ImageIcon | naver.maps.Marker~SymbolIcon | naver.maps.Marker~HtmlIcon>} icons 클러스터 마커 아이콘
      */
-    setIcons: function (icons) {
+    setIcons: function (icons: any) {
       this.setOptions("icons", icons);
     },
 
     /**
      * 클러스터 마커의 엘리먼트를 조작할 수 있는 스타일링 함수를 반환합니다.
-     * @return {Funxtion} 콜백함수
+     * @return {Function} 콜백함수
      */
-    getStylingFunction: function () {
+    getStylingFunction: function (): any {
       return this.getOptions("stylingFunction");
     },
 
@@ -233,7 +233,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커의 엘리먼트를 조작할 수 있는 스타일링 함수를 설정합니다.
      * @param {Function} func 콜백함수
      */
-    setStylingFunction: function (func) {
+    setStylingFunction: function (func: any) {
       this.setOptions("stylingFunction", func);
     },
 
@@ -249,7 +249,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커를 클릭했을 때 줌 동작 수행 여부를 설정합니다.
      * @param {boolean} flag 줌 동작 수행 여부
      */
-    setDisableClickZoom: function (flag) {
+    setDisableClickZoom: function (flag: any) {
       this.setOptions("disableClickZoom", flag);
     },
 
@@ -257,7 +257,7 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커의 위치를 클러스터를 구성하고 있는 마커의 평균 좌표로 할 것인지 여부를 반환합니다.
      * @return {boolean} 평균 좌표로 클러스터링 여부
      */
-    getAverageCenter: function () {
+    getAverageCenter: function (): any {
       return this.getOptions("averageCenter");
     },
 
@@ -265,12 +265,12 @@ if (typeof window !== "undefined" && window.naver) {
      * 클러스터 마커의 위치를 클러스터를 구성하고 있는 마커의 평균 좌표로 할 것인지 여부를 설정합니다.
      * @param {boolean} averageCenter 평균 좌표로 클러스터링 여부
      */
-    setAverageCenter: function (averageCenter) {
+    setAverageCenter: function (averageCenter: any) {
       this.setOptions("averageCenter", averageCenter);
     },
 
     // KVO 이벤트 핸들러
-    changed: function (key, value) {
+    changed: function (key: any, value: any) {
       if (!this.getMap()) return;
 
       switch (key) {
@@ -282,19 +282,19 @@ if (typeof window !== "undefined" && window.naver) {
           break;
         case "indexGenerator":
         case "icons":
-          this._clusters.forEach(function (cluster) {
+          this._clusters.forEach(function (cluster: any) {
             cluster.updateIcon();
           });
           break;
         case "maxZoom":
-          this._clusters.forEach(function (cluster) {
+          this._clusters.forEach(function (cluster: any) {
             if (cluster.getCount() > 1) {
               cluster.checkByZoomAndMinClusterSize();
             }
           });
           break;
         case "stylingFunction":
-          this._clusters.forEach(function (cluster) {
+          this._clusters.forEach(function (cluster: any) {
             cluster.updateCount();
           });
           break;
@@ -305,7 +305,7 @@ if (typeof window !== "undefined" && window.naver) {
             exec = "disableClickZoom";
           }
 
-          this._clusters.forEach(function (cluster) {
+          this._clusters.forEach(function (cluster: any) {
             cluster[exec]();
           });
           break;
@@ -384,7 +384,7 @@ if (typeof window !== "undefined" && window.naver) {
      * @param {naver.maps.LatLng} position 위/경도
      * @return {Cluster} 클러스터
      */
-    _getClosestCluster: function (position) {
+    _getClosestCluster: function (position: any) {
       var proj = this.getProjection(),
         clusters = this._clusters,
         closestCluster = null,
@@ -431,7 +431,39 @@ if (typeof window !== "undefined" && window.naver) {
  * 마커를 가지고 있는 클러스터를 정의합니다.
  * @param {MarkerClustering} markerClusterer
  */
-function Cluster(this: any, markerClusterer: any) {
+interface ClusterConstructor {
+  new (markerClusterer: any): ClusterInstance;
+}
+
+interface ClusterInstance {
+  _clusterCenter: any;
+  _clusterBounds: any;
+  _clusterMarker: any;
+  _relation: any;
+  _clusterMember: any[];
+  _markerClusterer: any;
+  addMarker: (marker: any) => void;
+  destroy: () => void;
+  getCenter: () => any;
+  getBounds: () => any;
+  getCount: () => number;
+  getClusterMember: () => any[];
+  isInBounds: (latlng: any) => boolean;
+  enableClickZoom: () => void;
+  disableClickZoom: () => void;
+  updateCluster: () => void;
+  checkByZoomAndMinClusterSize: () => void;
+  updateCount: () => void;
+  updateIcon: () => void;
+  _showMember: () => void;
+  _hideMember: () => void;
+  _calcBounds: (position: any) => any;
+  _getIndex: (count: number) => number;
+  _isMember: (marker: any) => boolean;
+  _calcAverageCenter: (markers: any[]) => any;
+}
+
+const Cluster: ClusterConstructor = function (this: any, markerClusterer: any) {
   this._clusterCenter = null;
   this._clusterBounds = null;
   this._clusterMarker = null;
@@ -440,7 +472,7 @@ function Cluster(this: any, markerClusterer: any) {
   this._clusterMember = [];
 
   this._markerClusterer = markerClusterer;
-}
+} as any;
 
 Cluster.prototype = {
   constructor: Cluster,
@@ -449,7 +481,7 @@ Cluster.prototype = {
    * 클러스터에 마커를 추가합니다.
    * @param {naver.maps.Marker} marker 클러스터에 추가할 마커
    */
-  addMarker: function (marker) {
+  addMarker: function (marker: any) {
     if (this._isMember(marker)) return;
 
     if (!this._clusterCenter) {
@@ -521,7 +553,7 @@ Cluster.prototype = {
    * @param {naver.maps.LatLng} latlng 위/경도
    * @return {boolean} 클러스터 경계 영역 내의 위치 여부
    */
-  isInBounds: function (latlng) {
+  isInBounds: function (latlng: any): any {
     return this._clusterBounds && this._clusterBounds.hasLatLng(latlng);
   },
 
@@ -536,7 +568,7 @@ Cluster.prototype = {
     this._relation = naver.maps.Event.addListener(
       this._clusterMarker,
       "click",
-      naver.maps.Util.bind(function (e) {
+      naver.maps.Util.bind(function (e: any) {
         map.morph(e.coord, map.getZoom() + 1);
       }, this)
     );
@@ -669,7 +701,7 @@ Cluster.prototype = {
    * @return {naver.maps.LatLngBounds} 클러스터 경계 영역
    * @private
    */
-  _calcBounds: function (position) {
+  _calcBounds: function (position: any) {
     var map = this._markerClusterer.getMap(),
       bounds = new naver.maps.LatLngBounds(position.clone(), position.clone()),
       mapBounds = map.getBounds(),
@@ -699,7 +731,7 @@ Cluster.prototype = {
    * @return {number} 인덱스
    * @private
    */
-  _getIndex: function (count) {
+  _getIndex: function (count: any): any {
     var indexGenerator = this._markerClusterer.getIndexGenerator();
 
     if (naver.maps.Util.isFunction(indexGenerator)) {
@@ -725,7 +757,7 @@ Cluster.prototype = {
    * @return {boolean} 클러스터에 속해 있는지 여부
    * @private
    */
-  _isMember: function (marker) {
+  _isMember: function (marker: any): any {
     return this._clusterMember.indexOf(marker) !== -1;
   },
 
@@ -735,7 +767,7 @@ Cluster.prototype = {
    * @return {naver.maps.Point} 마커들의 중심 좌표
    * @private
    */
-  _calcAverageCenter: function (markers) {
+  _calcAverageCenter: function (markers: any[]): any {
     var numberOfMarkers = markers.length;
     var averageCenter = [0, 0];
 
