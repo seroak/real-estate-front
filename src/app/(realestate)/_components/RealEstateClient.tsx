@@ -1,6 +1,4 @@
-// app/(realestate)/_components/RealEstateClient.tsx
 "use client";
-
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";

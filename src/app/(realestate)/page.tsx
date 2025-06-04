@@ -1,10 +1,8 @@
-// app/(realestate)/page.tsx
 import { Suspense } from "react";
 import RealEstateClient from "./_components/RealEstateClient";
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 import getRealEstateDatas from "./_lib/getRealEstateDatas";
 import { SearchParams } from "next/dist/server/request/search-params";
-import RQProviders from "../_components/RQProvider";
 export default async function RealEstatePage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const resolvedSearchParams = await searchParams;
   const gu = resolvedSearchParams.gu ? resolvedSearchParams.gu : undefined;
