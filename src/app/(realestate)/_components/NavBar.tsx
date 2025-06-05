@@ -11,8 +11,8 @@ const NavBar = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const [showSlider, setShowSlider] = useState(false);
   const [showSearchLocation, setShowSearchLocation] = useState(true);
-  const [depositRange, setDepositRange] = useState<[number, number]>([3500, 60000]);
-  const [monthlyRentRange, setMonthlyRentRange] = useState<[number, number]>([30, 1000]);
+  const [depositRange, setDepositRange] = useState<[number, number]>([0, 100000000]);
+  const [monthlyRentRange, setMonthlyRentRange] = useState<[number, number]>([0, 500]);
   const [step, setStep] = useState<"city" | "gu" | "dong">("city");
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedGu, setSelectedGu] = useState<string | null>(null);
