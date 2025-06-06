@@ -30,6 +30,7 @@ export default function EstateItemCard({ realEstateList }: { realEstateList: Art
   const saveRealEstateItem = (_id: string) => {
     mutate(_id);
   };
+
   return (
     <div>
       {realEstateList?.map((item) => (
@@ -40,7 +41,7 @@ export default function EstateItemCard({ realEstateList }: { realEstateList: Art
               <div className="text-sm text-gray-600">
                 보증금 {item.deposit_fee} / 월세 {item.rent_fee}
               </div>
-              <div className="flex gap-2 text-xs mt-2">
+              {/* <div className="flex gap-2 text-xs mt-2">
                 {item.article_short_features === "None"
                   ? [].map((tag) => (
                       <span key={tag} className="bg-gray-100 px-2 py-1 rounded">
@@ -52,7 +53,7 @@ export default function EstateItemCard({ realEstateList }: { realEstateList: Art
                         {tag}
                       </span>
                     ))}
-              </div>
+              </div> */}
               <div className="text-xs text-gray-500 mt-2">{item.agent_office_post}</div>
               <div className="text-xs text-gray-500">{item.dong}</div>
             </div>
