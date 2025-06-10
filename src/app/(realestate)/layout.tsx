@@ -5,8 +5,9 @@ export default function RealEstateLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="relative max-w-9xl mx-auto px-4 min-h-screen overflow-visible">
       <NavBar />
+
       {children}
     </div>
   );
