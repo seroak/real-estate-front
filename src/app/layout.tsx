@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="ko">
       <body suppressHydrationWarning>
         <RQProviders>
-          <main className="max-w-6xl mx-auto px-4 pt-4 pb-10">{children}</main>
+          <main className="mx-auto px-4 pt-4 pb-10">{children}</main>
           <Analytics />
         </RQProviders>
       </body>
