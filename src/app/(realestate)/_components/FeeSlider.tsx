@@ -26,7 +26,6 @@ const formatMoney = (val: number) => {
 const FeeSlider = ({ depositRange, setDepositRange, monthlyRentRange, setMonthlyRentRange }: Props) => {
   const [toggle, setToggle] = useState({ minDeposit: false, maxDeposit: false, minRent: false, maxRent: false });
 
-  // Local temp state for input fields
   const [tempDepositMin, setTempDepositMin] = useState(depositRange[0]);
   const [tempDepositMax, setTempDepositMax] = useState(depositRange[1]);
   const [tempMonthlyMin, setTempMonthlyMin] = useState(monthlyRentRange[0]);
@@ -50,7 +49,7 @@ const FeeSlider = ({ depositRange, setDepositRange, monthlyRentRange, setMonthly
 
   return (
     <div className="w-100 z-40">
-      <section className="max-w-6xl mx-auto px-4 py-4 bg-white rounded-b">
+      <section className="mx-auto px-4 py-4 bg-white rounded-b">
         <div className="flex flex-col gap-6">
           <div>
             <div className="mb-1 font-semibold text-sm">보증금 (전세금)</div>
