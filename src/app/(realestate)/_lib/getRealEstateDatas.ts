@@ -31,6 +31,7 @@ export default async function getRealEstateDatas({
   });
   console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
   const url = new URL("/get_articles", process.env.NEXT_PUBLIC_API_URL);
+  console.log("Constructed URL:", url.toString());
   const multiValueParams = {
     gu,
     dong,
