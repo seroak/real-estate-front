@@ -29,7 +29,7 @@ const DeleteFolderButton = ({ user, foldername }: Props) => {
       alert(`폴더 삭제 실패: ${error.message}`);
     },
   });
-  <div></div>;
+
   return (
     <button onClick={() => mutation.mutate()} className="bg-red-600 text-white px-4 py-2 rounded text-sm mb-4">
       폴더 삭제
