@@ -21,6 +21,14 @@ export default async function getRealEstateDatas({
   };
 }): Promise<RealEstateResponse> {
   const { gu, deposit_min, deposit_max, rent_min, rent_max, dong } = filters;
+  console.log("Fetching real estate data with filters:", {
+    gu,
+    dong,
+    deposit_min,
+    deposit_max,
+    rent_min,
+    rent_max,
+  });
   const url = new URL("/get_articles", process.env.NEXT_PUBLIC_API_URL);
   const multiValueParams = {
     gu,
