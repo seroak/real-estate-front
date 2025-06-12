@@ -655,7 +655,6 @@ Cluster.prototype = {
 
     index = Math.max(index, 0);
     index = Math.min(index, icons.length - 1);
-    console.log("🧩 클러스터 icon 객체", icons);
     this._clusterMarker.setIcon(icons[index]);
   },
 
