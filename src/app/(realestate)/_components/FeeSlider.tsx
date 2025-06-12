@@ -36,7 +36,6 @@ const FeeSlider = ({ depositRange, setDepositRange, monthlyRentRange, setMonthly
   const monthlyRentMinRef = useRef<HTMLInputElement>(null);
   const monthlyRentMaxRef = useRef<HTMLInputElement>(null);
 
-  // Sync temp state with props when they change
   useEffect(() => {
     setTempDepositMin(depositRange[0]);
     setTempDepositMax(depositRange[1]);
