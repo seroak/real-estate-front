@@ -46,12 +46,13 @@ export default async function getRealEstateDatas({
 
   url.searchParams.append("cursor", pageParam.toString());
 
-  const response = await fetch(url.toString(), {
+  const res = await fetch(url.toString(), {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
   });
 
-  if (!response.ok) throw new Error("Failed to fetch real estate listings");
-  return await response.json();
+  if (!res.ok) throw new Error("Failed to fetch real estate listings");
+  const response = await res.json();
+  return response;
 }
