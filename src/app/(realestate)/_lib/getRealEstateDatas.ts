@@ -30,8 +30,9 @@ export default async function getRealEstateDatas({
     rent_max,
   });
   console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
-  const url = new URL("/get_articles", process.env.NEXT_PUBLIC_API_URL);
-  console.log("Constructed URL:", url.toString());
+  let apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/get_articles`;
+
+  const params = new URLSearchParams();
   const multiValueParams = {
     gu,
     dong,
@@ -42,13 +43,12 @@ export default async function getRealEstateDatas({
   };
 
   Object.entries(multiValueParams).forEach(([key, value]) => {
-    if (value === undefined) return;
-    url.searchParams.append(key, value);
+    if (value === undefined || value === null) return;
+    params.append(key, Array.isArray(value) ? value.join(",") : value);
   });
-
-  url.searchParams.append("cursor", pageParam.toString());
-
-  const res = await fetch(url.toString(), {
+  params.append("cursor", pageParam.toString());
+  apiUrl = `${apiUrl}?${params.toString()}`;
+  const res = await fetch(apiUrl, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
