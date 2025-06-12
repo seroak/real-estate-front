@@ -23,7 +23,8 @@ export default function RealEstateClient({
   rent_max?: string;
 }) {
   const [selectedEstateIds, setSelectedEstateIds] = useState<Set<string>>(new Set());
-
+  console.log("RealEstateClient props:", { gu, dong, deposit_min, deposit_max, rent_min, rent_max });
+  console.log("RealEstateClient queryKey filters:", { gu, deposit_min, deposit_max, rent_min, rent_max, dong });
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
     queryKey: ["search", { gu, deposit_min, deposit_max, rent_min, rent_max, dong }] as const,
     queryFn: ({ pageParam = "1", queryKey }) => {
