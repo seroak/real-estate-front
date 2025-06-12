@@ -54,5 +54,6 @@ export default async function getRealEstateDatas({
 
   if (!res.ok) throw new Error("Failed to fetch real estate listings");
   const response = await res.json();
+  console.log("Real estate data fetched successfully:", response);
   return response;
 }
