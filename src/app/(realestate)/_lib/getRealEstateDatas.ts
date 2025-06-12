@@ -29,6 +29,7 @@ export default async function getRealEstateDatas({
     rent_min,
     rent_max,
   });
+  console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
   const url = new URL("/get_articles", process.env.NEXT_PUBLIC_API_URL);
   const multiValueParams = {
     gu,
