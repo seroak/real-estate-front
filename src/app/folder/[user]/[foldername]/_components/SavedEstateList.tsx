@@ -80,7 +80,7 @@ const SavedEstateList = ({ user, foldername }: Props) => {
         possible_move,
         article_regist_date,
       }) => ({
-        제목: article_title,
+        매물분류: article_title,
         보증금: deposit_fee,
         월세: rent_fee,
         관리비: management_fee,
