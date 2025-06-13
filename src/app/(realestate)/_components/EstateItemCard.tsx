@@ -1,5 +1,6 @@
 "use client";
 import { Article } from "@/src/app/(realestate)/types/realEstate";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface EstateItemCardProps {
@@ -12,7 +13,7 @@ export default function EstateItemCard({ realEstate, isSelected, onSelect }: Est
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSelect(realEstate._id, e.target.checked);
   };
-
+  const router = useRouter();
   return (
     <div>
       <div
@@ -50,7 +51,12 @@ export default function EstateItemCard({ realEstate, isSelected, onSelect }: Est
             <div className="text-xs text-gray-500">{realEstate.dong}</div>
           </div>
         </div>
-        <div className="relative w-full h-48 bg-gray-100 rounded ml-4">
+        <div
+          className="relative w-full h-48 bg-gray-100 rounded ml-4"
+          onClick={() => {
+            window.open(`https://fin.land.naver.com/articles/${realEstate.article_no}`, "_blank");
+          }}
+        >
           {realEstate.image_url ? (
             <Image
               src={"https://landthumb-phinf.pstatic.net" + realEstate.image_url}

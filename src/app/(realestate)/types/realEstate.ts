@@ -1,5 +1,6 @@
 export interface Article {
   _id: string;
+  article_no: string;
   article_id: string;
   article_title: string;
   article_short_description: string;

@@ -74,7 +74,8 @@ export default function RealEstateClient({
 
   return (
     <div className="flex justify-between px-4 pt-4 pb-10">
-      <div className="w-full p-4">
+      <div className="relative w-full p-4">
+        {isFetching && !isFetchingNextPage && <LoadingSpinner />}
         {allListings.length === 0 ? (
           <p className="text-gray-600 text-sm mb-4">원하는 동을 눌러서 검색하세요</p>
         ) : (
@@ -85,7 +86,6 @@ export default function RealEstateClient({
               체크박스를 선택하여 내 리스트에 담을 매물을 한 번에 저장하세요.
             </p>
 
-            {isFetching && !isFetchingNextPage && <LoadingSpinner />}
             <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
               {allListings.map((item: Article) => (
                 <EstateItemCard
