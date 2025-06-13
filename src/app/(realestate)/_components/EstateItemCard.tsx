@@ -1,6 +1,7 @@
 "use client";
 import { Article } from "@/src/app/(realestate)/types/realEstate";
 import { useRouter } from "next/navigation";
+import { formatMoney } from "@/src/app/(realestate)/_lib/formatMoney";
 import Image from "next/image";
 
 interface EstateItemCardProps {
@@ -36,7 +37,7 @@ export default function EstateItemCard({ realEstate, isSelected, onSelect }: Est
           <div>
             <div className="font-semibold">{realEstate.article_title}</div>
             <div className="text-sm text-gray-600">
-              보증금 {realEstate.deposit_fee} / 월세 {realEstate.rent_fee}
+              보증금 {formatMoney(realEstate.deposit_fee)} / 월세 {formatMoney(realEstate.rent_fee)}
             </div>
             {/* <div className="flex gap-2 text-xs mt-2">
               {realEstate.article_short_features === "None"
