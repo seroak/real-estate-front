@@ -86,14 +86,16 @@ export default function RealEstateClient({
             </p>
 
             {isFetching && !isFetchingNextPage && <LoadingSpinner />}
-            {allListings.map((item: Article) => (
-              <EstateItemCard
-                key={item._id}
-                realEstate={item}
-                isSelected={selectedEstateIds.has(item._id)}
-                onSelect={handleSelectEstate}
-              />
-            ))}
+            <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
+              {allListings.map((item: Article) => (
+                <EstateItemCard
+                  key={item._id}
+                  realEstate={item}
+                  isSelected={selectedEstateIds.has(item._id)}
+                  onSelect={handleSelectEstate}
+                />
+              ))}
+            </div>
             <div ref={observerRef} className="h-10"></div>
           </>
         )}
