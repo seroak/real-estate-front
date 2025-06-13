@@ -11,7 +11,9 @@ const SelectLocation = ({ selectedDong, setSelectedDong, dongMap }: Props) => {
           {(dongMap["영등포구"] || []).map((dong) => (
             <li
               key={dong}
-              className={`cursor-pointer box-border text-xs hover:text-blue-600 px-1 py-1 min-w-0 max-w-full`}
+              className={`cursor-pointer box-border text-xs hover:text-blue-600 px-1 py-1 min-w-0 max-w-full ${
+                selectedDong.has(dong) ? "bg-blue-200 text-blue-500 rounded" : ""
+              }`}
               onClick={() => {
                 setSelectedDong((prev) => {
                   const newSet = new Set(prev);
@@ -24,14 +26,7 @@ const SelectLocation = ({ selectedDong, setSelectedDong, dongMap }: Props) => {
                 });
               }}
             >
-              <span
-                className={`inline-block px-1 py-0.5 ${
-                  selectedDong.has(dong) ? "bg-blue-200 text-blue-500 rounded" : ""
-                }
-            `}
-              >
-                {dong}
-              </span>
+              {dong}
             </li>
           ))}
         </ul>
