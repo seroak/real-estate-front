@@ -47,7 +47,7 @@ const DepositAndRentInput = ({ depositRange, setDepositRange, monthlyRentRange, 
   }, [monthlyRentRange]);
 
   return (
-    <section className="mx-auto px-4 py-4 bg-white rounded-b">
+    <section className="flex justify-end py-4 bg-white rounded-b">
       <div className="flex flex-col gap-6">
         <div>
           <div className="mb-1 font-semibold text-sm">보증금 (전세금)</div>

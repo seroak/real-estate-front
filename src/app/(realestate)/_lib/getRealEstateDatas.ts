@@ -29,7 +29,7 @@ export default async function getRealEstateDatas({
     rent_min,
     rent_max,
   });
-  console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+
   let apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/get_articles`;
 
   const params = new URLSearchParams();

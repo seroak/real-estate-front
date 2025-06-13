@@ -210,7 +210,7 @@ const NavBar = () => {
             createFolderMutation={createFolderMutation}
           /> */}
         </div>
-        <div className="mx-auto px-4 py-2 flex gap-2">
+        <div className="flex justify-start px-4 py-2 flex gap-2">
           <SelectLocation selectedDong={selectedDong} setSelectedDong={setSelectedDong} dongMap={dongMap} />
 
           <DepositAndRentInput
