@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 // import SearchBar from "./SearchBar";
 import DepositAndRentInput from "./DepositAndRentInput";
@@ -24,6 +24,7 @@ const NavBar = () => {
   // const [isAddingFolder, setIsAddingFolder] = useState(false);
   // const [newFolderName, setNewFolderName] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // const { data: folders } = useQuery({
   //   queryKey: ["folders", "admin"],
@@ -107,7 +108,7 @@ const NavBar = () => {
   // }, []);
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
     if (selectedDong.size > 0) {
       params.set("gu", "영등포구");
       params.set("dong", [...selectedDong].join(","));
