@@ -20,7 +20,6 @@ const SavedEstateList = ({ user, foldername }: Props) => {
     queryKey: ["folderContent", user, decodeURIComponent(foldername)],
     queryFn: async ({ queryKey }) => {
       const [, user_id, folder_name] = queryKey;
-      console.log(`Fetching folder: ${folder_name} for user: ${user_id}`); // 디버깅을 위해 로깅 추가
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/folder/${user_id}/${folder_name}`);
       if (!res.ok) {
         throw new Error(`Failed to fetch saved estates: ${res.statusText}`);
@@ -60,7 +59,6 @@ const SavedEstateList = ({ user, foldername }: Props) => {
 
   const handleExportToCSV = () => {
     if (!savedEstates || savedEstates.length === 0) return;
-    console.log("Exporting saved estates to CSV:", savedEstates);
     const dataToExport = savedEstates.map(
       ({
         article_title,

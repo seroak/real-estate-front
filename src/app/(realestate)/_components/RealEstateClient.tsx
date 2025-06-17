@@ -35,9 +35,7 @@ export default function RealEstateClient({
     staleTime: 1000 * 60 * 5,
     placeholderData: (prevData) => prevData,
   });
-
   const allListings = data?.pages.flatMap((page) => page.real_estate_list) ?? [];
-  console.log("All Listings:", allListings);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

@@ -21,14 +21,6 @@ export default async function getRealEstateDatas({
   };
 }): Promise<RealEstateResponse> {
   const { gu, deposit_min, deposit_max, rent_min, rent_max, dong } = filters;
-  console.log("Fetching real estate data with filters:", {
-    gu,
-    dong,
-    deposit_min,
-    deposit_max,
-    rent_min,
-    rent_max,
-  });
 
   let apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/get_articles`;
 
@@ -56,6 +48,5 @@ export default async function getRealEstateDatas({
 
   if (!res.ok) throw new Error("Failed to fetch real estate listings");
   const response = await res.json();
-  console.log("Real estate data fetched successfully:", response);
   return response;
 }

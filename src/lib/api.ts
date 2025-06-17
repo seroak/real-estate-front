@@ -6,7 +6,6 @@ export const getFolderList = async ({ queryKey }: { queryKey: ["folders", string
   return data.folders;
 };
 export const addEstatesToFolder = async ({ folderName, estateIds }: { folderName: string; estateIds: string[] }) => {
-  console.log(estateIds);
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/folder/add-estate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
