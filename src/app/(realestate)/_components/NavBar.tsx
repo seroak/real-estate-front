@@ -109,16 +109,21 @@ const NavBar = () => {
     const params = stateToParams({ selectedDong, depositRange, monthlyRentRange, selectedArticleClass });
     router.replace(`/?${params.toString()}`);
   }, [selectedDong, depositRange, monthlyRentRange, selectedArticleClass, hasInitialized]);
-
+  const resetState = () => {
+    setSelectedDong(new Set());
+    setDepositRange([0, Infinity]);
+    setMonthlyRentRange([0, Infinity]);
+    setSelectedArticleClass({ type: "SELECT_ALL" });
+  };
   return (
     <div ref={navRef}>
       <header className="min-w-[555px] w-full bg-white shadow-sm border-b">
         <div className="mx-auto px-4 py-1 flex items-center justify-between gap-4">
-          <Link href="/" className="whitespace-nowrap text-lg font-bold text-blue-600">
+          <Link href="/" onClick={resetState} className="whitespace-nowrap text-lg font-bold text-blue-600">
             부동산 리스트
           </Link>
         </div>
-        <div className="flex justify-start px-4 py-2 flex gap-2">
+        <div className="flex justify-start px-4 py-2 flex gap-6">
           <SelectLocation selectedDong={selectedDong} setSelectedDong={setSelectedDong} dongMap={dongMap} />
           <SelectArticleClass
             selectedArticleClass={selectedArticleClass}
