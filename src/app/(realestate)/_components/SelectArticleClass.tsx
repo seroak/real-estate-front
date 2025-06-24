@@ -71,7 +71,8 @@ const SelectArticleClass = ({ selectedArticleClass, setSelectedArticleClass }: P
           w-full
           border border-gray-300
           rounded-md
-          px-4 py-2 pr-8
+          mt-4
+          px-4 py-2 pr-3
           text-sm
           shadow-md
           bg-white
