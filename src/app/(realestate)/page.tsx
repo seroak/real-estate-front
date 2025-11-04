@@ -9,6 +9,8 @@ type SearchParams = {
   rent_min?: string;
   rent_max?: string;
   dong?: string;
+  area_min?: string;
+  area_max?: string;
   article_class?: string;
 };
 export default async function RealEstatePage({ searchParams }: { searchParams: Promise<SearchParams> }) {
@@ -19,6 +21,8 @@ export default async function RealEstatePage({ searchParams }: { searchParams: P
   const rent_min = resolvedSearchParams.rent_min ? resolvedSearchParams.rent_min : undefined;
   const rent_max = resolvedSearchParams.rent_max ? resolvedSearchParams.rent_max : undefined;
   const dong = resolvedSearchParams.dong ? resolvedSearchParams.dong : undefined;
+  const area_min = resolvedSearchParams.area_min ? resolvedSearchParams.area_min : undefined;
+  const area_max = resolvedSearchParams.area_max ? resolvedSearchParams.area_max : undefined;
   const article_class = resolvedSearchParams.article_class ? resolvedSearchParams.article_class : "SELECT_ALL";
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
@@ -36,6 +40,8 @@ export default async function RealEstatePage({ searchParams }: { searchParams: P
           deposit_max={deposit_max}
           rent_min={rent_min}
           rent_max={rent_max}
+          area_min={area_min}
+          area_max={area_max}
           article_class={article_class}
         />
       </div>
