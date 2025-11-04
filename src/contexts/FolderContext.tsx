@@ -1,7 +1,7 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { useQuery, useMutation, useQueryClient, UseMutationResult } from '@tanstack/react-query';
-import { getFolderList, createFolder } from '@/src/lib/api';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { useQuery, useMutation, useQueryClient, UseMutationResult } from "@tanstack/react-query";
+import { getFolderList, createFolder } from "@/src/lib/api";
 
 // 1. Context 타입 정의
 interface FolderContextType {
@@ -48,18 +48,14 @@ export function FolderProvider({ children }: { children: ReactNode }) {
     createFolderMutation,
   };
 
-  return (
-    <FolderContext.Provider value={value}>
-      {children}
-    </FolderContext.Provider>
-  );
+  return <FolderContext value={value}>{children}</FolderContext>;
 }
 
 // 3. Custom Hook
 export function useFolder() {
   const context = useContext(FolderContext);
   if (!context) {
-    throw new Error('useFolder must be used within a FolderProvider');
+    throw new Error("useFolder must be used within a FolderProvider");
   }
   return context;
 }
