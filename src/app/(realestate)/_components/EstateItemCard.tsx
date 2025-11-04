@@ -1,5 +1,5 @@
 "use client";
-import { Article } from "@/src/app/(realestate)/types/realEstate";
+import { Article } from "@/src/types/real-estate";
 import { useRouter } from "next/navigation";
 import { formatMoney } from "@/src/app/(realestate)/_lib/formatMoney";
 import Image from "next/image";
@@ -60,7 +60,7 @@ export default function EstateItemCard({ realEstate, isSelected, onSelect }: Est
         >
           {realEstate.image_url ? (
             <Image
-              src={"https://landthumb-phinf.pstatic.net" + realEstate.image_url}
+              src={realEstate.image_url}
               alt={realEstate.article_title}
               fill
               style={{ objectFit: "contain" }} // 이미지가 잘리지 않고 비율 유지하며 모두 보이도록
