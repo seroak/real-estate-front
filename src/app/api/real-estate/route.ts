@@ -1,15 +1,22 @@
 import { mockProperties } from "@/src/msw/mockData";
-import { NextResponse } from "next/server";
-import crypto from "crypto";
+import { NextRequest, NextResponse } from "next/server";
+import { RealEstateResponse } from "@/src/types/real-estate";
 
-export async function GET() {
-  // In a real application, you might want to handle pagination, filtering, etc.
-  // For this portfolio version, we'll just return the whole mock data set.
-  const data = mockProperties;
+export async function GET(request: NextRequest) {
+  const allData = mockProperties;
 
-  const newData = data.map((object) => ({
-    ...object, // 기존 속성 복사
-    _id: crypto.randomBytes(16).toString("hex"), // 새로운 key 추가
-  }));
-  return NextResponse.json({ real_estate_list: newData });
+  const searchParams = request.nextUrl.searchParams;
+  const cursor = parseInt(searchParams.get("cursor") || "1");
+  const limit = 10; // 한 페이지에 10개씩 보여주기
+
+  const startIndex = (cursor - 1) * limit;
+  const endIndex = cursor * limit;
+
+  const paginatedData = allData.slice(startIndex, endIndex);
+
+  const response: RealEstateResponse = {
+    real_estate_list: paginatedData,
+  };
+
+  return NextResponse.json(response);
 }
