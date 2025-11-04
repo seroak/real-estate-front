@@ -1,16 +1,18 @@
 "use client";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState, useEffect, useReducer, useRef } from "react";
 import DepositAndRentInput from "./DepositAndRentInput";
 import SelectLocation from "./SelectLocation";
 import { selectArticleClassReducer } from "../_lib/selectArticleClassReducer";
 import SelectArticleClass from "./SelectArticleClass";
+import AreaRangeInput from "./AreaRangeInput";
 
 const NavBar = () => {
   const searchParams = useSearchParams();
-
   const router = useRouter();
+  const pathname = usePathname();
+
   const navRef = useRef<HTMLDivElement>(null);
   const [depositRange, setDepositRange] = useState<[number, number]>(() => {
     const params = new URLSearchParams(searchParams.toString());
@@ -32,6 +34,12 @@ const NavBar = () => {
     selectArticleClassReducer,
     searchParams.get("article_class") ?? "SELECT_ALL"
   );
+  const [areaRange, setAreaRange] = useState<[number, number]>(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const minArea = Number(params.get("area_min")) || 0;
+    const maxArea = Number(params.get("area_max")) || Infinity;
+    return [minArea, maxArea];
+  });
   const dongMap: { [gu: string]: string[] } = {
     영등포구: [
       "당산동",
@@ -75,11 +83,13 @@ const NavBar = () => {
     depositRange,
     monthlyRentRange,
     selectedArticleClass,
+    areaRange,
   }: {
     selectedDong: Set<string>;
     depositRange: [number, number];
     monthlyRentRange: [number, number];
     selectedArticleClass: string;
+    areaRange: [number, number];
   }) => {
     const params = new URLSearchParams();
     if (selectedDong.size > 0) {
@@ -94,6 +104,12 @@ const NavBar = () => {
     if (monthlyRentRange[1] !== Infinity) {
       params.set("rent_max", monthlyRentRange[1].toString());
     }
+    if (areaRange[0] !== 0) {
+      params.set("area_min", areaRange[0].toString());
+    }
+    if (areaRange[1] !== Infinity) {
+      params.set("area_max", areaRange[1].toString());
+    }
     params.set("article_class", selectedArticleClass);
     return params;
   };
@@ -106,14 +122,16 @@ const NavBar = () => {
 
   useEffect(() => {
     if (!hasInitialized) return;
-    const params = stateToParams({ selectedDong, depositRange, monthlyRentRange, selectedArticleClass });
-    router.replace(`/?${params.toString()}`);
-  }, [selectedDong, depositRange, monthlyRentRange, selectedArticleClass, hasInitialized]);
+    const params = stateToParams({ selectedDong, depositRange, monthlyRentRange, selectedArticleClass, areaRange });
+    router.replace(`${pathname}/?${params.toString()}`);
+  }, [selectedDong, depositRange, monthlyRentRange, selectedArticleClass, areaRange, hasInitialized]);
+
   const resetState = () => {
     setSelectedDong(new Set());
     setDepositRange([0, Infinity]);
     setMonthlyRentRange([0, Infinity]);
     setSelectedArticleClass({ type: "SELECT_ALL" });
+    setAreaRange([0, Infinity]);
   };
   return (
     <div ref={navRef}>
@@ -135,6 +153,7 @@ const NavBar = () => {
             monthlyRentRange={monthlyRentRange}
             setMonthlyRentRange={setMonthlyRentRange}
           />
+          <AreaRangeInput areaRange={areaRange} setAreaRange={setAreaRange} />
         </div>
       </header>
     </div>

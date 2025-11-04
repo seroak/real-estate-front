@@ -5,7 +5,7 @@ import EstateItemCard from "./EstateItemCard";
 import getRealEstateDatas from "../_lib/getRealEstateDatas";
 import LoadingSpinner from "@/src/app/_components/LoadingSpinner";
 import { Article } from "@/src/app/(realestate)/types/realEstate";
-import Toolbar from "../_components/Toolbar";
+import Toolbar from "./Toolbar";
 
 export default function RealEstateClient({
   gu,
@@ -14,6 +14,8 @@ export default function RealEstateClient({
   deposit_max,
   rent_min,
   rent_max,
+  area_min,
+  area_max,
   article_class,
 }: {
   gu?: string;
@@ -22,11 +24,16 @@ export default function RealEstateClient({
   deposit_max?: string;
   rent_min?: string;
   rent_max?: string;
+  area_min?: string;
+  area_max?: string;
   article_class?: string;
 }) {
   const [selectedEstateIds, setSelectedEstateIds] = useState<Set<string>>(new Set());
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
-    queryKey: ["search", { gu, deposit_min, deposit_max, rent_min, rent_max, dong, article_class }] as const,
+    queryKey: [
+      "search",
+      { gu, deposit_min, deposit_max, rent_min, rent_max, dong, area_min, area_max, article_class },
+    ] as const,
     queryFn: ({ pageParam, queryKey }) => {
       const [, filters] = queryKey;
       return getRealEstateDatas({ pageParam, filters });
@@ -36,6 +43,7 @@ export default function RealEstateClient({
     staleTime: 1000 * 60 * 5,
     placeholderData: (prevData) => prevData,
   });
+
   const allListings = data?.pages.flatMap((page) => page.real_estate_list) ?? [];
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -86,9 +94,9 @@ export default function RealEstateClient({
             </p>
 
             <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
-              {allListings.map((item: Article) => (
+              {allListings.map((item: Article, index) => (
                 <EstateItemCard
-                  key={item._id}
+                  key={index}
                   realEstate={item}
                   isSelected={selectedEstateIds.has(item._id)}
                   onSelect={handleSelectEstate}

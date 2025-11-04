@@ -7,7 +7,7 @@ const SelectLocation = ({ selectedDong, setSelectedDong, dongMap }: Props) => {
   return (
     <div className=" ">
       <section className="px-4 py-4 rounded-b">
-        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-12 gap-1 text-gray-700 ">
+        <ul className="grid grid-cols-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 gap-1 text-gray-700 ">
           {(dongMap["영등포구"] || []).map((dong) => (
             <li
               key={dong}
