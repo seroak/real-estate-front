@@ -1,11 +1,4 @@
-import { Article } from "@/src/app/(realestate)/types/realEstate";
-
-interface RealEstateResponse {
-  total_count: number;
-  real_estate_list: Article[];
-  nextPage: string | null;
-  prevPage: string | null;
-}
+import { RealEstateResponse } from "@/src/types/real-estate";
 
 export default async function getRealEstateDatas({
   pageParam,
