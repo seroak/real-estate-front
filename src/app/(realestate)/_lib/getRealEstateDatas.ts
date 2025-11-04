@@ -4,6 +4,7 @@ interface RealEstateResponse {
   total_count: number;
   real_estate_list: Article[];
   nextPage: string | null;
+  prevPage: string | null;
 }
 
 export default async function getRealEstateDatas({
@@ -18,12 +19,14 @@ export default async function getRealEstateDatas({
     deposit_max?: string;
     rent_min?: string;
     rent_max?: string;
+    area_min?: string;
+    area_max?: string;
     article_class?: string;
   };
 }): Promise<RealEstateResponse> {
-  const { gu, deposit_min, deposit_max, rent_min, rent_max, dong, article_class } = filters;
+  const { gu, deposit_min, deposit_max, rent_min, rent_max, dong, area_min, area_max, article_class } = filters;
 
-  let apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/get_articles`;
+  let apiUrl = `/api/real-estate`;
 
   const params = new URLSearchParams();
   const multiValueParams = {
@@ -33,6 +36,8 @@ export default async function getRealEstateDatas({
     deposit_max,
     rent_min,
     rent_max,
+    area_min,
+    area_max,
     article_class,
   };
 
@@ -50,5 +55,6 @@ export default async function getRealEstateDatas({
 
   if (!res.ok) throw new Error("Failed to fetch real estate listings");
   const response = await res.json();
+
   return response;
 }
