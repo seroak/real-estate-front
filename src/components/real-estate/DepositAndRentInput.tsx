@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { formatMoney } from "../_lib/formatMoney";
+import { formatMoney } from "@/src/lib/formatMoney";
 interface Props {
   depositRange: [number, number];
   setDepositRange: (range: [number, number]) => void;

@@ -1,5 +1,5 @@
 import "./globals.css";
-import RQProviders from "./_components/RQProvider";
+import RQProviders from "@/src/components/common/RQProvider";
 import { Analytics } from "@vercel/analytics/next";
 export default function RootLayout({
   children,

@@ -1,70 +1,31 @@
 "use client";
+import { useSearchFilter } from "@/src/contexts/SearchFilterContext";
+import { useFolder } from "@/src/contexts/FolderContext";
 import FeeSlider from "./FeeSlider";
 import SearchLocation from "./SearchLocation";
 
-interface Props {
-  showSearchFilter: boolean;
-  setShowSearchFilter: (v: boolean) => void;
-  showFolderSelect: boolean;
-  setShowFolderSelect: (v: boolean) => void;
-  showSlider: boolean;
-  setShowSlider: (v: boolean) => void;
-  showSearchLocation: boolean;
-  setShowSearchLocation: (v: boolean) => void;
-  depositRange: [number, number];
-  setDepositRange: (range: [number, number]) => void;
-  monthlyRentRange: [number, number];
-  setMonthlyRentRange: (range: [number, number]) => void;
-  step: "city" | "gu" | "dong";
-  setStep: (n: "city" | "gu" | "dong") => void;
-  selectedCity: string | null;
-  setSelectedCity: (c: string | null) => void;
-  selectedGu: string | null;
-  setSelectedGu: (g: string | null) => void;
-  selectedDong: Set<string>;
-  setSelectedDong: React.Dispatch<React.SetStateAction<Set<string>>>;
-  guMap: { [key: string]: string[] };
-  dongMap: { [key: string]: string[] };
-  searchRealEstate: () => void;
-  folders: { folders: string[] } | undefined;
-  isAddingFolder: boolean;
-  setIsAddingFolder: (v: boolean) => void;
-  newFolderName: string;
-  setNewFolderName: (v: string) => void;
-  createFolderMutation: any;
-}
+export default function NavAction() {
+  // Context를 통해 모든 상태와 함수를 직접 가져옵니다. Props는 더 이상 필요 없습니다.
+  const {
+    showSearchFilter,
+    setShowSearchFilter,
+    showSlider,
+    setShowSlider,
+    showSearchLocation,
+    setShowSearchLocation,
+  } = useSearchFilter();
 
-export default function NavAction({
-  showSearchFilter,
-  setShowSearchFilter,
-  showFolderSelect,
-  setShowFolderSelect,
-  showSlider,
-  setShowSlider,
-  showSearchLocation,
-  setShowSearchLocation,
-  depositRange,
-  setDepositRange,
-  monthlyRentRange,
-  setMonthlyRentRange,
-  step,
-  setStep,
-  selectedCity,
-  setSelectedCity,
-  selectedGu,
-  setSelectedGu,
-  selectedDong,
-  setSelectedDong,
-  guMap,
-  dongMap,
-  searchRealEstate,
-  folders,
-  isAddingFolder,
-  setIsAddingFolder,
-  newFolderName,
-  setNewFolderName,
-  createFolderMutation,
-}: Props) {
+  const {
+    showFolderSelect,
+    setShowFolderSelect,
+    folders,
+    isAddingFolder,
+    setIsAddingFolder,
+    newFolderName,
+    setNewFolderName,
+    createFolderMutation,
+  } = useFolder();
+
   return (
     <nav className="relative flex items-center gap-3 text-sm">
       <button
@@ -80,7 +41,7 @@ export default function NavAction({
       </button>
 
       {showSearchFilter && (
-        <div className="absolute right-0 top-[50px] flex flex-col items-center gap-2 bg-white border rounded-lg px-3 py-1">
+        <div className="absolute right-0 top-[50px] flex flex-col items-center gap-2 bg-white border rounded-lg px-3 py-1 w-96 shadow-lg">
           <div className="flex gap-3 py-2 w-full justify-center bg-white rounded-t-md">
             <button
               className={`px-4 py-2 text-sm w-full font-medium border border-gray-300 rounded-md transition cursor-pointer ${
@@ -108,30 +69,8 @@ export default function NavAction({
             </button>
           </div>
 
-          {showSlider && (
-            <FeeSlider
-              depositRange={depositRange}
-              setDepositRange={setDepositRange}
-              monthlyRentRange={monthlyRentRange}
-              setMonthlyRentRange={setMonthlyRentRange}
-            />
-          )}
-          {showSearchLocation && (
-            <SearchLocation
-              step={step}
-              setStep={setStep}
-              selectedCity={selectedCity}
-              setSelectedCity={setSelectedCity}
-              selectedGu={selectedGu}
-              setSelectedGu={setSelectedGu}
-              selectedDong={selectedDong}
-              setSelectedDong={setSelectedDong}
-              guMap={guMap}
-              dongMap={dongMap}
-              searchRealEstate={searchRealEstate}
-              setShowFilter={setShowSearchFilter}
-            />
-          )}
+          {showSlider && <FeeSlider />}
+          {showSearchLocation && <SearchLocation />}
         </div>
       )}
 

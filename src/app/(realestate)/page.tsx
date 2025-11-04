@@ -1,4 +1,4 @@
-import RealEstateClient from "./_components/RealEstateClient";
+import RealEstateClient from "@/src/components/real-estate/RealEstateClient";
 import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { getFolderList } from "@/src/lib/api";
 

@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import EstateItemCard from "./EstateItemCard";
-import getRealEstateDatas from "../_lib/getRealEstateDatas";
-import LoadingSpinner from "@/src/app/_components/LoadingSpinner";
+import getRealEstateDatas from "@/src/lib/getRealEstateDatas";
+import LoadingSpinner from "@/src/components/common/LoadingSpinner";
 import { Article } from "@/src/types/real-estate";
 import Toolbar from "./Toolbar";
+import { useEstateSelection } from "@/src/hooks/useEstateSelection";
 
 export default function RealEstateClient({
   gu,
@@ -28,7 +29,6 @@ export default function RealEstateClient({
   area_max?: string;
   article_class?: string;
 }) {
-  const [selectedEstateIds, setSelectedEstateIds] = useState<Set<string>>(new Set());
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } = useInfiniteQuery({
     queryKey: [
       "search",
@@ -47,6 +47,15 @@ export default function RealEstateClient({
   const allListings = data?.pages.flatMap((page) => page.real_estate_list) ?? [];
   const observerRef = useRef<HTMLDivElement | null>(null);
 
+  // Custom Hook으로 상태 관리 로직 위임
+  const {
+    selectedEstateIds,
+    handleSelectEstate,
+    handleSelectAll,
+    clearSelection,
+    allItemsSelected,
+  } = useEstateSelection(allListings);
+
   useEffect(() => {
     if (!observerRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver((entries) => {
@@ -55,29 +64,6 @@ export default function RealEstateClient({
     observer.observe(observerRef.current);
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage]);
-
-  const handleSelectEstate = (id: string, isChecked: boolean) => {
-    setSelectedEstateIds((prevSelectedIds) => {
-      const newSelectedIds = new Set(prevSelectedIds);
-      if (isChecked) {
-        newSelectedIds.add(id);
-      } else {
-        newSelectedIds.delete(id);
-      }
-      return newSelectedIds;
-    });
-  };
-
-  const handleSelectAllFromToolbar = (isChecked: boolean) => {
-    if (isChecked) {
-      const allIds = new Set(allListings.map((estate) => estate._id));
-      setSelectedEstateIds(allIds);
-    } else {
-      setSelectedEstateIds(new Set());
-    }
-  };
-
-  const allItemsSelected = allListings.length > 0 && selectedEstateIds.size === allListings.length;
 
   return (
     <div className="flex justify-between px-4 pt-4 pb-10">
@@ -94,9 +80,9 @@ export default function RealEstateClient({
             </p>
 
             <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
-              {allListings.map((item: Article, index) => (
+              {allListings.map((item: Article) => (
                 <EstateItemCard
-                  key={index}
+                  key={item._id} // index 대신 고유한 _id를 key로 사용
                   realEstate={item}
                   isSelected={selectedEstateIds.has(item._id)}
                   onSelect={handleSelectEstate}
@@ -110,10 +96,10 @@ export default function RealEstateClient({
       <Toolbar
         selectedCount={selectedEstateIds.size}
         allListingsCount={allListings.length}
-        onSelectAll={handleSelectAllFromToolbar}
+        onSelectAll={handleSelectAll}
         allItemsSelected={allItemsSelected}
         selectedEstateIds={selectedEstateIds}
-        onClearSelection={() => setSelectedEstateIds(new Set())}
+        onClearSelection={clearSelection}
       />
     </div>
   );

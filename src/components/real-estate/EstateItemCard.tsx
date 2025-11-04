@@ -1,7 +1,7 @@
 "use client";
 import { Article } from "@/src/types/real-estate";
 import { useRouter } from "next/navigation";
-import { formatMoney } from "@/src/app/(realestate)/_lib/formatMoney";
+import { formatMoney } from "@/src/lib/formatMoney";
 import Image from "next/image";
 
 interface EstateItemCardProps {

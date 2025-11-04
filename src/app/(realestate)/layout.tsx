@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import NavBar from "./_components/NavBar";
+import NavBar from "@/src/components/real-estate/NavBar";
 export default function RealEstateLayout({
   children,
 }: Readonly<{

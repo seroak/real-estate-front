@@ -1,9 +1,12 @@
+import { useContext } from "react";
+import { useSearchFilter } from "@/src/contexts/SearchFilterContext";
 interface Props {
   selectedDong: Set<string>;
   setSelectedDong: React.Dispatch<React.SetStateAction<Set<string>>>;
   dongMap: { [gu: string]: string[] };
 }
-const SelectLocation = ({ selectedDong, setSelectedDong, dongMap }: Props) => {
+const SelectLocation = () => {
+  const { selectedDong, setSelectedDong, dongMap } = useSearchFilter();
   return (
     <div className=" ">
       <section className="px-4 py-4 rounded-b">
