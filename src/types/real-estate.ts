@@ -23,3 +23,10 @@ export interface Article {
   possible_move: string;
   tag_list: string[];
 }
+
+export interface RealEstateResponse {
+  // total_count: number;
+  real_estate_list: Article[];
+  // nextPage: string | null;
+  // prevPage: string | null;
+}
