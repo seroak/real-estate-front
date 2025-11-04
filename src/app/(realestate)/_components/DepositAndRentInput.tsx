@@ -105,7 +105,7 @@ const DepositAndRentInput = ({ depositRange, setDepositRange, monthlyRentRange, 
               <button
                 className="border rounded px-2 py-1"
                 onClick={() => {
-                  const newVal = Math.max(0, (tempDepositMax === Infinity ? 230000 : tempDepositMax) - 100);
+                  const newVal = Math.max(0, (tempDepositMax === Infinity ? 230100 : tempDepositMax) - 100);
                   setTempDepositMax(newVal);
                   setDepositRange([tempDepositMin, newVal]);
                 }}
@@ -238,7 +238,7 @@ const DepositAndRentInput = ({ depositRange, setDepositRange, monthlyRentRange, 
               <button
                 className="border rounded px-2 py-1"
                 onClick={() => {
-                  const currentVal = tempMonthlyMax === Infinity ? 230000 : tempMonthlyMax;
+                  const currentVal = tempMonthlyMax === Infinity ? 230100 : tempMonthlyMax;
                   const newVal = Math.max(0, currentVal - 100);
                   setTempMonthlyMax(newVal);
                   setMonthlyRentRange([tempMonthlyMin, newVal]);
