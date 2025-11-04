@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import EstateItemCard from "./EstateItemCard";
 import getRealEstateDatas from "../_lib/getRealEstateDatas";
 import LoadingSpinner from "@/src/app/_components/LoadingSpinner";
-import { Article } from "@/src/app/(realestate)/types/realEstate";
+import { Article } from "@/src/types/real-estate";
 import Toolbar from "./Toolbar";
 
 export default function RealEstateClient({
