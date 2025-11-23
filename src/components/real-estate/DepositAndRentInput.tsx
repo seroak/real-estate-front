@@ -7,8 +7,17 @@ interface Props {
   monthlyRentRange: [number, number];
   setMonthlyRentRange: (range: [number, number]) => void;
 }
-
-const DepositAndRentInput = ({ depositRange, setDepositRange, monthlyRentRange, setMonthlyRentRange }: Props) => {
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
+import { useShallow } from "zustand/shallow";
+const DepositAndRentInput = () => {
+  const { depositRange, setDepositRange, monthlyRentRange, setMonthlyRentRange } = useSearchFilterStore(
+    useShallow((state) => ({
+      depositRange: state.depositRange,
+      setDepositRange: state.setDepositRange,
+      monthlyRentRange: state.monthlyRentRange,
+      setMonthlyRentRange: state.setMonthlyRentRange,
+    }))
+  );
   const [toggle, setToggle] = useState({ minDeposit: false, maxDeposit: false, minRent: false, maxRent: false });
 
   const [tempDepositMin, setTempDepositMin] = useState(depositRange[0]);

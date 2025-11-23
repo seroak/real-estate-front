@@ -1,11 +1,10 @@
 "use client";
-import { useSearchFilter } from "@/src/contexts/SearchFilterContext";
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
 import { useFolder } from "@/src/contexts/FolderContext";
 import FeeSlider from "./FeeSlider";
 import SearchLocation from "./SearchLocation";
 
 export default function NavAction() {
-  // Context를 통해 모든 상태와 함수를 직접 가져옵니다. Props는 더 이상 필요 없습니다.
   const {
     showSearchFilter,
     setShowSearchFilter,
@@ -13,8 +12,9 @@ export default function NavAction() {
     setShowSlider,
     showSearchLocation,
     setShowSearchLocation,
-  } = useSearchFilter();
+  } = useSearchFilterStore();
 
+  // createFolderMutation 대신 createFolder를 가져옵니다.
   const {
     showFolderSelect,
     setShowFolderSelect,
@@ -23,7 +23,7 @@ export default function NavAction() {
     setIsAddingFolder,
     newFolderName,
     setNewFolderName,
-    createFolderMutation,
+    createFolder,
   } = useFolder();
 
   return (
@@ -88,8 +88,9 @@ export default function NavAction() {
 
       {showFolderSelect && (
         <div className="absolute right-0 top-[50px] w-48 flex flex-col gap-2 bg-white border rounded-lg px-3 py-2 shadow-md">
+          {/* folders.folders가 아닌 folders를 직접 사용합니다. */}
           {folders &&
-            folders?.folders.map((folder: string, index: number) => (
+            folders.map((folder: string, index: number) => (
               <div key={index} className="flex justify-between items-center">
                 <span className="text-sm text-gray-800">{folder}</span>
                 <button className="text-xs text-red-500 hover:underline">삭제</button>
@@ -107,9 +108,10 @@ export default function NavAction() {
               <div className="flex gap-2">
                 <button
                   className="text-sm text-white bg-blue-500 rounded px-2 py-1 hover:bg-blue-600"
-                  onClick={async () => {
+                  onClick={() => {
                     if (!newFolderName.trim()) return;
-                    createFolderMutation.mutate(newFolderName);
+                    // mutate 대신 createFolder 함수를 직접 호출합니다.
+                    createFolder(newFolderName);
                     setNewFolderName("");
                     setIsAddingFolder(false);
                   }}

@@ -1,12 +1,19 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-
+import { useShallow } from "zustand/shallow";
 interface Props {
   areaRange: [number, number];
   setAreaRange: (range: [number, number]) => void;
 }
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
+const AreaRangeInput = () => {
+  const { areaRange, setAreaRange } = useSearchFilterStore(
+    useShallow((state) => ({
+      areaRange: state.areaRange,
+      setAreaRange: state.setAreaRange,
+    }))
+  );
 
-const AreaRangeInput = ({ areaRange, setAreaRange }: Props) => {
   const [toggle, setToggle] = useState({ minArea: false, maxArea: false });
 
   const [tempAreaMin, setTempAreaMin] = useState(areaRange[0]);

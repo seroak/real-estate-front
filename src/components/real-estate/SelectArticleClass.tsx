@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Transition } from "framer-motion";
-
-interface Props {
-  selectedArticleClass: string;
-  setSelectedArticleClass: (action: { type: string }) => void;
-}
-
-const SelectArticleClass = ({ selectedArticleClass, setSelectedArticleClass }: Props) => {
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
+import { useShallow } from "zustand/shallow";
+const SelectArticleClass = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { selectedArticleClass, dispatchSelectedArticleClass } = useSearchFilterStore(
+    useShallow((state) => ({
+      selectedArticleClass: state.selectedArticleClass,
+      dispatchSelectedArticleClass: state.dispatchSelectedArticleClass,
+    }))
+  );
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -31,7 +33,7 @@ const SelectArticleClass = ({ selectedArticleClass, setSelectedArticleClass }: P
 
   const selectedLabel = options.find((option) => option.value === selectedArticleClass)?.label;
   const handleSelect = (value: string) => {
-    setSelectedArticleClass({ type: value }); // 타입을 명시적으로 지정
+    dispatchSelectedArticleClass({ type: value }); // 타입을 명시적으로 지정
     setIsOpen(false);
   };
 

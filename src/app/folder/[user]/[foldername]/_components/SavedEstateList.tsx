@@ -1,9 +1,9 @@
 "use client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"; // useMutation, useQueryClient 추가
-import { Article } from "@/src/app/(realestate)/types/realEstate";
+import { Article } from "@/src/types/real-estate";
 import Image from "next/image";
 import * as XLSX from "xlsx";
-import { formatMoney } from "@/src/app/(realestate)/_lib/formatMoney";
+import { formatMoney } from "@/src/lib/formatMoney";
 interface Props {
   user: string;
   foldername: string;

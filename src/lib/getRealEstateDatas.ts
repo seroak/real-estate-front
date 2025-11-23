@@ -21,6 +21,11 @@ export default async function getRealEstateDatas({
 
   let apiUrl = `/api/real-estate`;
 
+  if (typeof window === "undefined") {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    apiUrl = `${baseUrl}${apiUrl}`;
+  }
+
   const params = new URLSearchParams();
   const multiValueParams = {
     gu,

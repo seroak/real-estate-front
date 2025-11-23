@@ -1,12 +1,15 @@
 "use client";
-import { useSearchFilter } from "@/src/contexts/SearchFilterContext";
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
 import { formatMoney } from "@/src/lib/formatMoney";
 
 export default function FeeSlider() {
-  const { depositRange, setDepositRange, monthlyRentRange, setMonthlyRentRange } = useSearchFilter();
+  const depositRange = useSearchFilterStore((state) => state.depositRange);
+  const setDepositRange = useSearchFilterStore((state) => state.setDepositRange);
+  const monthlyRentRange = useSearchFilterStore((state) => state.monthlyRentRange);
+  const setMonthlyRentRange = useSearchFilterStore((state) => state.setMonthlyRentRange);
 
   return (
-    <div className="w-full max-w-md p-4 bg-white rounded-lg shadow">
+    <div className="w-full max-w-md p-4 bg-white rounded-lg">
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700">보증금</label>
         <input

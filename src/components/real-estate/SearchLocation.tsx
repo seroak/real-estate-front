@@ -1,5 +1,6 @@
 "use client";
-import { useSearchFilter } from "@/src/contexts/SearchFilterContext";
+import { useSearchFilterStore } from "@/src/store/searchFilterStore";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function SearchLocation() {
   const {
@@ -13,9 +14,11 @@ export default function SearchLocation() {
     setSelectedDong,
     guMap,
     dongMap,
-    searchRealEstate,
     setShowSearchFilter,
-  } = useSearchFilter();
+  } = useSearchFilterStore();
+  
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleSelectDong = (dong: string) => {
     setSelectedDong((prev) => {
@@ -28,6 +31,12 @@ export default function SearchLocation() {
       return newSet;
     });
   };
+
+  const handleSearch = () => {
+    // The search logic (URL update) is now handled in the StateSync component in NavBar.
+    // Here, we just close the filter UI.
+    setShowSearchFilter(false);
+  }
 
   const renderStep = () => {
     switch (step) {
@@ -87,10 +96,7 @@ export default function SearchLocation() {
             ))}
             </div>
             <button 
-              onClick={() => {
-                searchRealEstate();
-                setShowSearchFilter(false);
-              }}
+              onClick={handleSearch}
               className="w-full mt-4 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
             >
               선택 완료

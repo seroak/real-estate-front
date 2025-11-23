@@ -25,8 +25,8 @@ export interface Article {
 }
 
 export interface RealEstateResponse {
-  // total_count: number;
+  total_count: number;
   real_estate_list: Article[];
-  // nextPage: string | null;
-  // prevPage: string | null;
+  nextPage: string | null;
+  prevPage: string | null;
 }

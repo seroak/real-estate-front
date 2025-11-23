@@ -1,6 +1,6 @@
 import RealEstateClient from "@/src/components/real-estate/RealEstateClient";
-import { QueryClient, HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import { getFolderList } from "@/src/lib/api";
+import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import getRealEstateDatas from "@/src/lib/getRealEstateDatas";
 
 type SearchParams = {
   gu?: string;
@@ -13,6 +13,7 @@ type SearchParams = {
   area_max?: string;
   article_class?: string;
 };
+
 export default async function RealEstatePage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const resolvedSearchParams = await searchParams;
   const gu = resolvedSearchParams.gu ? resolvedSearchParams.gu : undefined;
@@ -24,14 +25,32 @@ export default async function RealEstatePage({ searchParams }: { searchParams: P
   const area_min = resolvedSearchParams.area_min ? resolvedSearchParams.area_min : undefined;
   const area_max = resolvedSearchParams.area_max ? resolvedSearchParams.area_max : undefined;
   const article_class = resolvedSearchParams.article_class ? resolvedSearchParams.article_class : "SELECT_ALL";
+
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["folders", "admin"],
-    queryFn: getFolderList,
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["search", { gu, deposit_min, deposit_max, rent_min, rent_max, dong, area_min, area_max, article_class }],
+    queryFn: ({ pageParam }) => {
+      return getRealEstateDatas({
+        pageParam: pageParam as string,
+        filters: {
+          gu,
+          deposit_min,
+          deposit_max,
+          rent_min,
+          rent_max,
+          dong,
+          area_min,
+          area_max,
+          article_class,
+        },
+      });
+    },
+    initialPageParam: "1",
   });
-  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <HydrationBoundary state={dehydratedState}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <div>
         <RealEstateClient
           gu={gu}

@@ -7,6 +7,7 @@ import LoadingSpinner from "@/src/components/common/LoadingSpinner";
 import { Article } from "@/src/types/real-estate";
 import Toolbar from "./Toolbar";
 import { useEstateSelection } from "@/src/hooks/useEstateSelection";
+import { useScheduledInvalidation } from "@/src/hooks/useScheduledInvalidation";
 
 export default function RealEstateClient({
   gu,
@@ -44,17 +45,15 @@ export default function RealEstateClient({
     placeholderData: (prevData) => prevData,
   });
 
+  // 매일 새벽 2시에 "search" 쿼리 무효화 (자동 갱신)
+  useScheduledInvalidation(2, ["search"]);
+
   const allListings = data?.pages.flatMap((page) => page.real_estate_list) ?? [];
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   // Custom Hook으로 상태 관리 로직 위임
-  const {
-    selectedEstateIds,
-    handleSelectEstate,
-    handleSelectAll,
-    clearSelection,
-    allItemsSelected,
-  } = useEstateSelection(allListings);
+  const { selectedEstateIds, handleSelectEstate, handleSelectAll, clearSelection, allItemsSelected } =
+    useEstateSelection(allListings);
 
   useEffect(() => {
     if (!observerRef.current || !hasNextPage) return;
